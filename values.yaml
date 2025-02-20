@@ -1,0 +1,35 @@
+# VALORES QUE USARA PARA EL DEPLOYMENT
+
+replicaCount: 1
+
+image:
+  repository: "sbonilla284/app1"
+  tag: "3.8"
+
+resources:
+  requests:
+    cpu: "250m"
+
+startupProbe:
+  path: "/api/"
+  initialDelaySeconds: 35
+  periodSeconds: 10
+  failureThreshold: 6
+
+database:
+  url: "jdbc:postgresql://postgres-service.db.svc.cluster.local:5432/bdnames"
+  username: "names"
+  password: "names"
+
+# VALORES QUE USARA PARA EL SERVICE
+
+service:
+  port: 8080
+  type: ClusterIP
+
+# VALORES QUE USARA PARA EL HPA
+
+hpa:
+  minReplicas: 1
+  maxReplicas: 3
+  targetCPUUtilizationPercentage: 75
