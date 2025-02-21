@@ -2,6 +2,8 @@
 
 replicaCount: 1
 
+namespace: "app1"
+
 image:
   repository: "sbonilla284/app1"
   tag: "5"
