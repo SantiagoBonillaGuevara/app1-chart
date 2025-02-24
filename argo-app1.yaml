@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: app1
+  namespace: argocd
+  annotations:
+    argocd-image-updater.argoproj.io/image-list: "sbonilla284/app1:latest" # Monitors Docker Hub
+    argocd-image-updater.argoproj.io/app-update-strategy: "helm" # Updates Helm chart values.yaml
+    argocd-image-updater.argoproj.io/write-back-method: "git:secret:argocd/argocd-repo-creds" # Updates Git repo
+spec:
+  project: default
+  source:
+    repoURL: https://lufe04.github.io/Helm_Repo/
+    targetRevision: 0.1.0
+    chart: app1-chart
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: app1
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
