@@ -4,9 +4,8 @@ metadata:
   name: app1
   namespace: argocd
   annotations:
-    argocd-image-updater.argoproj.io/image-list: "sbonilla284/app1:latest" # Monitors Docker Hub
-    argocd-image-updater.argoproj.io/app-update-strategy: "helm" # Updates Helm chart values.yaml
-    argocd-image-updater.argoproj.io/write-back-method: "git:secret:argocd/argocd-repo-creds" # Updates Git repo
+    argocd-image-updater.argoproj.io/image-list: "sbonilla284/app1:latest"
+    argocd-image-updater.argoproj.io/update-strategy: "latest"
 spec:
   project: default
   source:
